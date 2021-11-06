@@ -37,6 +37,23 @@ jobs:
       - run:
           name: "[eslint,markdownlint]: Lint"
           command: "npm run lint"
+      - run:
+          name: "[tsc]: Typecheck"
+          command: "npm run typecheck"
+      - run:
+          name: "[tape]: Test"
+          command: "npm run test"
+
+  coverage:
+    executor: node-lts
+    working_directory: ~/tpl-node
+    steps:
+      - checkout
+      - restore_cache:
+          key: tpl-node-{{ checksum "package-lock.json" }}
+      - run:
+          name: "[c8,coveralls]: Coveralls"
+          command: "npm run coverage"
 
   publish:
     executor: node-lts
@@ -69,8 +86,13 @@ workflows:
             branches:
               only: [ master ]
           requires: [ setup ]
-      - publish:
+      - coverage:
           filters:
             branches:
               only: [ master ]
           requires: [ test ]
+      - publish:
+          filters:
+            branches:
+              only: [ master ]
+          requires: [ coverage ]
