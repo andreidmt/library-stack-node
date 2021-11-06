@@ -2,7 +2,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/andreidmt/library-stack-node/badge.svg)](https://coveralls.io/github/andreidmt/library-stack-node)
 
-# Node.js Library Stack
+# Library Stack for Node.js projects
 
 > **library stack**  
 > _noun_
@@ -11,42 +11,48 @@
 > purpose of automating common development practices: __compile__, __lint__,
 > __typecheck__, __test__, __test coverage__, __benchmark__ and __release__.
 
-While similar to a
-[Framework](https://en.wikipedia.org/wiki/Software_framework), providing an
-opinionated ways of handling certain development topics, it intentionally
-leaves visible the containing libraries details - configuration file, npm
-scripts, commit hooks etc.
+- :godmode: **Composition over hierarchy** - While similar to a
+  [Framework](https://en.wikipedia.org/wiki/Software_framework), providing an
+  opinionated ways of handling certain development topics, it intentionally
+  leaves visible the containing libraries details - configuration file, npm
+  scripts, commit hooks etc.
 
-The approach gives developers the freedom of configuration and choice over
-their application core libraries, focusing on __zero lock-in__ and
-__experimentation__ with new libraries and workflows.
+- :honeybee: :ocean: **Configuration freedom and choice** over their
+  application core libraries, focusing on __zero lock-in__ and
+  __experimentation__ with new libraries and workflows.
 
 ## Table of contents
 
 <!-- vim-markdown-toc GFM -->
 
-- [Responsabilities](#responsabilities)
+- [How to use](#how-to-use)
+- [Responsibilities](#responsibilities)
   - [Compile](#compile)
   - [Lint](#lint)
   - [Typecheck](#typecheck)
   - [Test](#test)
+    - [All tests one time](#all-tests-one-time)
+    - [All tests when something inside `src` changes](#all-tests-when-something-inside-src-changes)
   - [Test coverage](#test-coverage)
   - [Benchmark](#benchmark)
   - [Release](#release)
-- [How to use](#how-to-use)
+- [Changelog](#changelog)
 
 <!-- vim-markdown-toc -->
 
-## Responsabilities
+## How to use
+
+## Responsibilities
 
 ### Compile
 
 1. [**typescript**](https://github.com/microsoft/TypeScript) -
-   [`.tscrc`](.tscrc) - A superset of JavaScript that compiles to clean
-   JavaScript output.
-1. [**swc**](https://github.com/swc-project/swc) - [`.swcrc`](.swcrc) - A
-   super-fast compiler written in Rust; producing widely-supported javascript
-   from modern standards and typescript.
+   [`.tscrc`](.tscrc)  
+  A superset of JavaScript that compiles to clean JavaScript output.
+
+1. [**swc**](https://github.com/swc-project/swc) - [`.swcrc`](.swcrc)  
+  A super-fast compiler written in Rust; producing widely-supported JavaScript
+  from modern standards and typescript.
 
 Compile TypeScript files inside `src` folder, with type definitions and source
 maps, into `dist`.
@@ -92,8 +98,8 @@ npm run lint
 
 ### Typecheck
 
-1. [**typescript**](https://github.com/microsoft/TypeScript) - [`.tscrc`](.tscrc)
-    - A superset of JavaScript that compiles to clean JavaScript output.
+1. [**typescript**](https://github.com/microsoft/TypeScript) - [`.tscrc`](.tscrc)  
+  A superset of JavaScript that compiles to clean JavaScript output.
 
 ```bash
 # "typecheck": "tsc --project .tscrc --noEmit",
@@ -102,33 +108,35 @@ npm run typecheck
 
 ### Test
 
-1. [**tape**](https://github.com/substack/tape)  
-  [TAP](https://en.wikipedia.org/wiki/Test_Anything_Protocol) producing test harness for node and browsers.
+1. [**tape**](https://github.com/substack/tape)
+   [TAP](https://en.wikipedia.org/wiki/Test_Anything_Protocol) producing test
+   harness for node and browsers.
 
 1. [**tap-nirvana**](https://github.com/inadarei/tap-nirvana)  
   Tap Nirvana is a proper diffing reporter for TAP.
 
 1. [**nodemon**](https://github.com/remy/nodemon/)  
-  Monitor changes in your application and automatically run an npm script - perfect for development.
+  Monitor changes in your application and automatically run an npm script -
+  perfect for development.
 
-- All tests one time
+#### All tests one time
 
-    ```bash
-    # "pretest": "npm run build.js",
-    # "test": "tape 'dist/*.test.js' 'dist/**/*.test.js' | tap-nirvana",
-    npm run test
-    ```
+```bash
+# "pretest": "npm run build.js",
+# "test": "tape 'dist/*.test.js' 'dist/**/*.test.js' | tap-nirvana",
+npm run test
+```
 
-- All tests when something inside `src` changes
+#### All tests when something inside `src` changes
 
-    ```bash
-    # "tdd": "nodemon --watch src --ext js,ts,json --exec 'npm test'",
-    npm run tdd
-    ```
+```bash
+# "tdd": "nodemon --watch src --ext js,ts,json --exec 'npm test'",
+npm run tdd
+```
 
 ### Test coverage
 
-[tape running all test files inside src folder](/docs/screenshot-test.png)
+![tape running all test files inside src folder](/docs/screenshot-test.png)
 
 1. [**c8**](https://github.com/bcoe/c8) - [`.c8rc`](.c8rc)  
   Output coverage reports using Node.js' built in coverage.
@@ -147,9 +155,9 @@ npm run coverage
 
 ### Benchmark
 
-[benchmark suite code (left) and output](/docs/screenshot-benchmark.png)
+![benchmark suite code (left) and output](/docs/screenshot-benchmark.png)
 
-1. [benny](https://github.com/caderek/benny)  
+1. [**benny**](https://github.com/caderek/benny)  
   A dead simple benchmarking framework for JS/TS libs.
 
 ```bash
@@ -160,10 +168,13 @@ npm run benchmark
 
 ### Release
 
-1. [semantic-release](https://github.com/semantic-release/semantic-release)  
+1. [**semantic-release**](https://github.com/semantic-release/semantic-release)  
   Fully automated version management and package publishing.
 
-1. [CircleCI](https://circleci.com) - [.circleci/config.yml](.circleci/config.yml)  
+1. [**CircleCI**](https://circleci.com) - [`.circleci/config.yml`](.circleci/config.yml)  
   Continuous integration platform.
 
-## How to use
+## Changelog
+
+See the [releases section](https://github.com/andreidmt/library-stack-node) for
+details.

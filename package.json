@@ -1,7 +1,7 @@
 {
   "name": "library-stack-node",
   "version": "0.0.1",
-  "description": "Library Stack for Node.js",
+  "description": "Library Stack for Node.js projects",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
