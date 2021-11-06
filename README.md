@@ -1,137 +1,169 @@
 <!-- markdownlint-disable first-line-h1 line-length -->
 
-[![Coverage Status](https://coveralls.io/repos/github/andreidmt/tpl-node/badge.svg)](https://coveralls.io/github/andreidmt/tpl-node)
+[![Coverage Status](https://coveralls.io/repos/github/andreidmt/library-stack-node/badge.svg)](https://coveralls.io/github/andreidmt/library-stack-node)
 
-# Node.js library starter template
+# Node.js Library Stack
 
-> ~framework~ **library stack**  
+> **library stack**  
 > _noun_
 >
-> Set of libraries or services configured and composed together with the
-> purpose of automating common development practices: __compiling__,
-> __linting__, __testing__, __benchmarking__ and __releasing__.
+> Set of libraries and services configured and composed together with the
+> purpose of automating common development practices: __compile__, __lint__,
+> __typecheck__, __test__, __test coverage__, __benchmark__ and __release__.
 
-<details>
-  <summary>Read more ></summary>
-  
-  > While similar to a
-  > [Framework](https://en.wikipedia.org/wiki/Software_framework), providing an
-  > opinionated way of handling certain topics, it intentionally leaves visible the
-  > containing libraries details - configuration file, npm scripts, commit hooks
-  > etc.  
-  >
-  > The approach gives developers the freedom of configuration and choice over
-  > their application core libraries, focusing on __zero lock-in__ and
-  > __experimentation__ with other libraries and workflows.
-</details>
+While similar to a
+[Framework](https://en.wikipedia.org/wiki/Software_framework), providing an
+opinionated ways of handling certain development topics, it intentionally
+leaves visible the containing libraries details - configuration file, npm
+scripts, commit hooks etc.
+
+The approach gives developers the freedom of configuration and choice over
+their application core libraries, focusing on __zero lock-in__ and
+__experimentation__ with new libraries and workflows.
 
 ## Table of contents
 
 <!-- vim-markdown-toc GFM -->
 
-* [Compile](#compile)
-  * [Fresh build](#fresh-build)
-  * [Fast incremental builds](#fast-incremental-builds)
-* [Lint](#lint)
-  * [Scripts](#scripts)
-* [Test](#test)
-  * [Services](#services)
-  * [Scripts](#scripts-1)
-* [Benchmark](#benchmark)
-  * [Scripts](#scripts-2)
-* [Release](#release)
-  * [Services](#services-1)
-* [How to use](#how-to-use)
+- [Responsabilities](#responsabilities)
+  - [Compile](#compile)
+  - [Lint](#lint)
+  - [Typecheck](#typecheck)
+  - [Test](#test)
+  - [Test coverage](#test-coverage)
+  - [Benchmark](#benchmark)
+  - [Release](#release)
+- [How to use](#how-to-use)
 
 <!-- vim-markdown-toc -->
 
-## Compile
+## Responsabilities
 
-1. [**typescript**](https://github.com/microsoft/TypeScript) - A superset of JavaScript that compiles to clean JavaScript output.
-    - related files: [`.tsconfig.json`](.tsconfig.json)
+### Compile
 
-### Fresh build
+1. [**typescript**](https://github.com/microsoft/TypeScript) -
+   [`.tscrc`](.tscrc) - A superset of JavaScript that compiles to clean
+   JavaScript output.
+1. [**swc**](https://github.com/swc-project/swc) - [`.swcrc`](.swcrc) - A
+   super-fast compiler written in Rust; producing widely-supported javascript
+   from modern standards and typescript.
 
-Compile TypeScript files inside `src` folder into `dist`.
-
-```bash
-# "prebuild.fresh": "rm -rf ./dist",
-# "build.fresh": "tsc",
-npm run build.fresh
-```
-
-### Fast incremental builds
-
-Useful for supporting other scripts that would otherwise require `ts-node` or
-`-r @babel/register`.
+Compile TypeScript files inside `src` folder, with type definitions and source
+maps, into `dist`.
 
 ```bash
-# "build": "tsc --build --incremental",
+# "build.js": "swc src -d dist",
+# "build.types": "tsc --project .tscrc --emitDeclarationOnly",
+# "build": "npm run build.js && npm run build.types",
 npm run build
 ```
 
-[`--build`](https://www.typescriptlang.org/docs/handbook/compiler-options.html) - Build one or more projects and their dependencies, if out of date  
-[`--incremental`](https://www.typescriptlang.org/tsconfig/#incremental) - Save `.tsbuildinfo` files to allow for incremental compilation of projects
+### Lint
 
-## Lint
+1. [**eslint**](https://github.com/eslint/eslint) - [`.eslintrc`](.eslintrc)  
+  Find and fix problems in your JavaScript code.
 
-- [eslint](https://github.com/eslint/eslint) - Find and fix problems in your JavaScript code.
-- [prettier](https://github.com/prettier/prettier) - Opinionated code formatter. It enforces a consistent style by parsing your code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
-- [markdownlint](https://github.com/igorshubovych/markdownlint-cli) - A Node.js style checker and lint tool for Markdown/CommonMark files.
-- [commitlint](https://github.com/conventional-changelog/commitlint) - commitlint checks if your commit messages meet the [conventional commit format](https://www.conventionalcommits.org).
-- [lint-staged](https://github.com/okonet/lint-staged) - Run linters against staged git files and don't let :hankey: slip into your codebase!
+1. [**prettier**](https://github.com/prettier/prettier) -
+   [`.prettierrc`](.prettierrc)  
+  Opinionated code formatter. Enforces a consistent style by parsing your
+  code and re-printing it with its own rules that take the maximum line length
+  into account, wrapping code when necessary.
 
-### Scripts
+1. [**markdownlint**](https://github.com/igorshubovych/markdownlint-cli) -
+   [`.markdownlintrc`](.markdownlintrc)  
+  Style checker and lint tool for Markdown/CommonMark files.
 
-## Test
+1. [**commitlint**](https://github.com/conventional-changelog/commitlint) -
+[`.commitlintrc`](.commitlintrc)  
+  Check your commit messages meet the [conventional commit
+  format](https://www.conventionalcommits.org).
 
-- [tape](https://github.com/substack/tape) - [TAP](https://en.wikipedia.org/wiki/Test_Anything_Protocol) producing test harness for node and browsers.
-- [tap-nirvana](https://github.com/inadarei/tap-nirvana) - A TAP reporter optimized for developer comfort above anything else.
-- [nyc](https://github.com/istanbuljs/nyc) - Wrap JavaScript code with line counters, so that you can track how well your unit-tests exercise your codebase.
-
-### Services
-
-- [Coveralls](https://coveralls.io/) - Test coverage reporting.
-
-### Scripts
-
-- Run all test files inside `src` folder
+1. [**lint-staged**](https://github.com/okonet/lint-staged) -
+[`.lintstagedrc`](.lintstagedrc)  
+  Run linters against staged git files and don't let :hankey: slip into your
+  codebase!
 
 ```bash
-# "pretest": "npm run build",
-# "test": "tape 'dist/**/*.test.js' | tap-nirvana",
-npm run test
+# "lint.js": "eslint --quiet src",
+# "lint.md": "markdownlint '*.md'",
+# "lint": "npm run lint.js && npm run lint.md",
+npm run lint
 ```
 
-- Run `test` npm script every time a file changes in `src`
+### Typecheck
+
+1. [**typescript**](https://github.com/microsoft/TypeScript) - [`.tscrc`](.tscrc)
+    - A superset of JavaScript that compiles to clean JavaScript output.
 
 ```bash
-# "tdd": "nodemon --watch src --exec 'npm test'",
-npm run tdd
+# "typecheck": "tsc --project .tscrc --noEmit",
+npm run typecheck
 ```
 
-## Benchmark
+### Test
 
-[benchmark suite code (left) and output](docs/screenshot-benchmark.png)
+1. [**tape**](https://github.com/substack/tape)  
+  [TAP](https://en.wikipedia.org/wiki/Test_Anything_Protocol) producing test harness for node and browsers.
 
-- [benny](https://github.com/caderek/benny) - A dead simple benchmarking framework for JS/TS libs
+1. [**tap-nirvana**](https://github.com/inadarei/tap-nirvana)  
+  Tap Nirvana is a proper diffing reporter for TAP.
 
-### Scripts
+1. [**nodemon**](https://github.com/remy/nodemon/)  
+  Monitor changes in your application and automatically run an npm script - perfect for development.
 
-- Run all benchmark files inside `src` folder
+- All tests one time
+
+    ```bash
+    # "pretest": "npm run build.js",
+    # "test": "tape 'dist/*.test.js' 'dist/**/*.test.js' | tap-nirvana",
+    npm run test
+    ```
+
+- All tests when something inside `src` changes
+
+    ```bash
+    # "tdd": "nodemon --watch src --ext js,ts,json --exec 'npm test'",
+    npm run tdd
+    ```
+
+### Test coverage
+
+[tape running all test files inside src folder](/docs/screenshot-test.png)
+
+1. [**c8**](https://github.com/bcoe/c8) - [`.c8rc`](.c8rc)  
+  Output coverage reports using Node.js' built in coverage.
+
+1. [**coveralls.io**](https://coveralls.io/)  
+  Service for test coverage reporting.  
+  
+Use either `.coveralls.yml` or `COVERALLS_REPO_TOKEN` environment variable to
+submit the reports to your project, see [Coveralls Currently Supports These
+CIs](https://docs.coveralls.io/supported-ci-services) for details.  
 
 ```bash
-# "prebenchmark": "npm run build && rm -rf ./benchmark",
+# "coverage": "c8 npm test && c8 report --reporter=text-lcov | coveralls",
+npm run coverage
+```
+
+### Benchmark
+
+[benchmark suite code (left) and output](/docs/screenshot-benchmark.png)
+
+1. [benny](https://github.com/caderek/benny)  
+  A dead simple benchmarking framework for JS/TS libs.
+
+```bash
+# "prebenchmark": "npm run build.js && rm -rf ./benchmark",
 # "benchmark": "node dist/**/*.bench.js",
 npm run benchmark
 ```
 
-## Release
+### Release
 
-- [semantic-release](https://github.com/semantic-release/semantic-release)
+1. [semantic-release](https://github.com/semantic-release/semantic-release)  
+  Fully automated version management and package publishing.
 
-### Services
-
-- [CircleCI](https://circleci.com) - Continuous integration platform.
+1. [CircleCI](https://circleci.com) - [.circleci/config.yml](.circleci/config.yml)  
+  Continuous integration platform.
 
 ## How to use
