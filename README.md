@@ -7,9 +7,10 @@
 > **library stack**  
 > _noun_
 >
-> Set of libraries and services configured and composed together with the
-> purpose of automating common development practices: __compile__, __lint__,
-> __typecheck__, __test__, __test coverage__, __benchmark__ and __release__.
+> Multiple libraries and services configured and composed together with the
+> purpose of automating common development practices: __compilation__,
+> __linting__, __typechecking__, __testing__, __test coverage__,
+> __benchmarking__ and __releasing__.
 
 - :godmode: **Composition over hierarchy** - While similar to a
   [Framework](https://en.wikipedia.org/wiki/Software_framework), providing an
@@ -17,9 +18,9 @@
   leaves visible the containing libraries details - configuration file, npm
   scripts, commit hooks etc.
 
-- :honeybee: :ocean: **Configuration freedom and choice** over their
-  application core libraries, focusing on __zero lock-in__ and
-  __experimentation__ with new libraries and workflows.
+- :honeybee: :ocean: **Continuous stack refactoring** - Configuration freedom
+  and choice over their application core libraries, focusing on __zero
+  lock-in__ and __experimentation__ with new libraries and workflows.
 
 ## Table of contents
 
