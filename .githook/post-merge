@@ -1,0 +1,7 @@
+#!/bin/sh
+
+filesChanged=$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD \
+  | grep -c "package-lock.json" \
+)
+
+[ "$filesChanged" != "0" ] && npm install
