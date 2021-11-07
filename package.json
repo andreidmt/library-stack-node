@@ -73,7 +73,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@asd14/eslint-config": "^6.3.0",
+    "@asd14/eslint-config": "^6.4.0",
     "@commitlint/cli": "^14.1.0",
     "@commitlint/config-conventional": "^14.1.0",
     "@semantic-release/changelog": "^6.0.1",
@@ -92,7 +92,7 @@
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-no-inferred-method-name": "^2.0.0",
     "eslint-plugin-promise": "^5.1.1",
-    "eslint-plugin-unicorn": "^38.0.0",
+    "eslint-plugin-unicorn": "^37.0.0",
     "lint-staged": "^11.2.6",
     "markdownlint-cli": "^0.29.0",
     "nodemon": "^2.0.14",
