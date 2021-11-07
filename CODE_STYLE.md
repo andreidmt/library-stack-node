@@ -25,12 +25,16 @@ The following is inspired from:
 - [Line length](#line-length)
 - [Folder structure and imports](#folder-structure-and-imports)
 - [Naming](#naming)
+  - [Branches](#branches)
+  - [Commit messages](#commit-messages)
   - [Functions](#functions)
   - [Booleans](#booleans)
   - [Constants](#constants)
   - [Handlers and Props](#handlers-and-props)
   - [Types](#types)
   - [Generic names](#generic-names)
+- [Testing](#testing)
+  - [React components](#react-components)
 
 <!-- vim-markdown-toc -->
 
@@ -77,8 +81,6 @@ and [Readability: the Optimal Line
 Length](https://baymard.com/blog/line-length-readability) are good intros on
 the topic.
 
-PS: Linus Torvalds has a guest appearance :)
-
 ## Folder structure and imports
 
 The principle of ["One Way Data
@@ -96,24 +98,24 @@ can also be applied to component imports/dependencies.
 
   ```text
   ▾ HMVC/
-    ▾ entity1/
+    ▾ todos/
         controller
         model
         view
-    ▾ entity2/
+    ▾ comments/
         controller
         model
         view
   ▾ MVC/
     ▾ controllers/
-        entity1
-        entity2
+        todos
+        comments
     ▾ models/
-        entity1
-        entity2
+        todos
+        comments
     ▾ views/
-        entity1
-        entity2
+        todos
+        comments
   ```
 
 - A child should never import something from it's parents or it's siblings, _it
@@ -123,6 +125,21 @@ can also be applied to component imports/dependencies.
   _handed down through props_ (data, functions or other Components)
 
 ## Naming
+
+### Branches
+
+- Main: `main`
+- PR: `feat|fix|docs/{task-id}/few-word-summary`
+
+### Commit messages
+
+Use [Conventional Commits](https://www.conventionalcommits.org).
+
+```text
+feat(ui): allow provided config object to extend other configs
+
+BREAKING CHANGE: `extends` key in config file is now used for extending other config files
+```
 
 ### Functions
 
@@ -317,3 +334,20 @@ const InputUI = (
 
     ```js
     ```
+
+## Testing
+
+### React components
+
+- Tag all the essential parts of the component with a `data-testid`. It is the
+  state and composition of these parts that determine the behavior of the
+  component.
+- Check the component's configuration without coupling the test to HTML or
+  CSS, making it less brittle. If I need to enforce a certain HTML tag, you can
+  check the attributes of the element in question.
+- Using multiple selector functions (`queryByRole`, `findByText`,
+  `getAllByRole` etc) creates noise and adds complexity in a space where
+  everything should be as dumb/simple as possible - the subject matter is the
+  component you're currently testing, not how fancy the API of the test library
+  or the test runner are - hence I would use fewer different query functions
+  and test what the state of the a part is.
