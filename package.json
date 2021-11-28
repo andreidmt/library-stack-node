@@ -66,8 +66,10 @@
     "test": "tape -r swc-register 'src/*.test.ts' 'src/**/*.test.ts' | tap-nirvana",
     "tdd": "nodemon --watch src --ext js,ts,json --exec 'npm test'",
     "----TEST-COVERAGE": "",
+    "precoverage": "rm -rf coverage",
     "coverage": "c8 npm test && c8 report --reporter=text-lcov | coveralls",
     "----BENCHMARK": "",
+    "prebenchmark": "rm -rf benchmark",
     "benchmark": "node -r swc-register src/**/*.bench.ts",
     "----PUBLISH": "",
     "publish": "semantic-release"

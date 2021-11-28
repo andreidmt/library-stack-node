@@ -29,6 +29,8 @@
 - [How to use](#how-to-use)
 - [Responsibilities](#responsibilities)
   - [Compile](#compile)
+    - [Tools](#tools)
+    - [Scripts](#scripts)
   - [Lint](#lint)
   - [Typecheck](#typecheck)
   - [Test](#test)
@@ -47,21 +49,35 @@
 
 ### Compile
 
+Compile TypeScript files inside `src` folder, with type definitions and source
+maps.
+
+Create bundles for both ESM and CommonJS modules. Use `package.json` fields,
+`main` and `module`, to point to the appropriate bundle depending on who is
+consuming it.
+
+#### Tools
+
 1. [**typescript**](https://github.com/microsoft/TypeScript) -
-   [`.tscrc`](.tscrc)  
+   [`tsconfig.json`](tsconfig.json)  
   A superset of JavaScript that compiles to clean JavaScript output.
 
 1. [**swc**](https://github.com/swc-project/swc) - [`.swcrc`](.swcrc)  
   A super-fast compiler written in Rust; producing widely-supported JavaScript
   from modern standards and typescript.
 
-Compile TypeScript files inside `src` folder, with type definitions and source
-maps, into `dist`.
+1. [**swc-register**](https://github.com/Songkeys/swc-register) - Transpile
+   JSX, TypeScript and esnext features on the fly with `swc`. It will respect
+   your `tsconfig.json` and `.swcrc` if provided.  
+
+#### Scripts
 
 ```bash
-# "build.js": "swc src -d dist",
-# "build.types": "tsc --project .tscrc --emitDeclarationOnly",
-# "build": "npm run build.js && npm run build.types",
+# "build.types": "tsc --emitDeclarationOnly --outDir dist-types",
+# "build.js-esm": "swc src --out-dir dist-esm --config module.type=es6",
+# "build.js-cjs": "swc src --out-dir dist-cjs --config module.type=commonjs",
+# "prebuild": "rm -rf dist-cjs dist-esm dist-types",
+# "build": "npm run build.js-esm && npm run build.js-cjs && npm run build.types",
 npm run build
 ```
 
@@ -92,7 +108,7 @@ npm run build
 
 ```bash
 # "lint.js": "eslint --quiet src",
-# "lint.md": "markdownlint '*.md'",
+# "lint.md": "markdownlint '*.md' --ignore CHANGELOG.md",
 # "lint": "npm run lint.js && npm run lint.md",
 npm run lint
 ```
@@ -103,7 +119,7 @@ npm run lint
   A superset of JavaScript that compiles to clean JavaScript output.
 
 ```bash
-# "typecheck": "tsc --project .tscrc --noEmit",
+# "typecheck": "tsc --noEmit",
 npm run typecheck
 ```
 
@@ -123,8 +139,7 @@ npm run typecheck
 #### All tests one time
 
 ```bash
-# "pretest": "npm run build.js",
-# "test": "tape 'dist/*.test.js' 'dist/**/*.test.js' | tap-nirvana",
+# "test": "tape -r swc-register 'src/*.test.ts' 'src/**/*.test.ts' | tap-nirvana",
 npm run test
 ```
 
@@ -150,6 +165,7 @@ submit the reports to your project, see [Coveralls Currently Supports These
 CIs](https://docs.coveralls.io/supported-ci-services) for details.  
 
 ```bash
+# "precoverage": "rm -rf coverage",
 # "coverage": "c8 npm test && c8 report --reporter=text-lcov | coveralls",
 npm run coverage
 ```
@@ -162,8 +178,8 @@ npm run coverage
   A dead simple benchmarking framework for JS/TS libs.
 
 ```bash
-# "prebenchmark": "npm run build.js && rm -rf ./benchmark",
-# "benchmark": "node dist/**/*.bench.js",
+# "prebenchmark": "rm -rf benchmark",
+# "benchmark": "node -r swc-register src/**/*.bench.ts",
 npm run benchmark
 ```
 
