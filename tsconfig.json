@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-    "target": "esnext",
+    "target": "es2021",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "resolveJsonModule": true,
@@ -9,9 +9,7 @@
     "skipLibCheck": true,
     "declaration": true,
     "declarationMap": true,
-    "incremental": true,
-    "tsBuildInfoFile": "./.tsbuildinfo",
-    "outDir": "dist"
+    "incremental": true
 	},
 	"include": [
 		"src"

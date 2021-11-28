@@ -1,5 +1,6 @@
 import test from "tape"
-import { sum } from "./index.js"
+
+import { sum } from "./index"
 
 test("main", t => {
   t.equal(

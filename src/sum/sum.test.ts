@@ -1,5 +1,6 @@
 import test from "tape"
-import { sum } from "./sum.js"
+
+import { sum } from "./sum"
 
 test("sum: add together all items inside an array", t => {
   t.plan(3)

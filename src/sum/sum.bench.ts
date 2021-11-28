@@ -1,7 +1,8 @@
 /* eslint-disable unicorn/no-array-reduce */
 
 import { suite, add, complete, cycle, save } from "benny"
-import { sum } from "./sum.js"
+
+import { sum } from "./sum"
 
 // Implementation 1
 const sumWithForLoop = sum

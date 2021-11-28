@@ -3,6 +3,7 @@
   "extends": ["@asd14/eslint-config/targets/node-ts"],
 
   "rules": {
+    "import/extensions": ["error", "never"]
   },
 
   "settings": {

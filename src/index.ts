@@ -1,1 +1,1 @@
-export { sum } from "./sum/sum.js"
+export { sum } from "./sum/sum"
