@@ -1,19 +1,20 @@
 # Coding Style
 
 All teams work differently, a _team's style_ should represent the deliberation
-and negotiation of each coding aspect by the members of that team.
+and negotiation of each coding aspect by the members of that team so keep in 
+mind that:
 
-- These are not immutable rules, things change, evolve and serve different
-  purposes in different stages of development and experience.
+- Things change, evolve and serve different purposes in different stages of
+  development and experience.
 - All conventions are right as long as people using them agree on their meaning
   and form.
 
-The following is inspired from:
+Recommended reading:
 
-- [Elements of JavaScript
-  Style](https://medium.com/javascript-scene/elements-of-javascript-style-caa8821cb99f)
 - [Thinking on
   Paper](https://www.amazon.com/Thinking-Paper-V-Howard/dp/0688048730)
+- [Elements of JavaScript
+  Style](https://medium.com/javascript-scene/elements-of-javascript-style-caa8821cb99f)
 
 ---
 
@@ -21,20 +22,25 @@ The following is inspired from:
 
 <!-- vim-markdown-toc GFM -->
 
-- [Thoughts on coding](#thoughts-on-coding)
-- [Line length](#line-length)
-- [Folder structure and imports](#folder-structure-and-imports)
-- [Naming](#naming)
-  - [Functions](#functions)
-  - [Booleans](#booleans)
-  - [Constants](#constants)
-  - [Handlers and Props](#handlers-and-props)
-  - [Types](#types)
-  - [Generic names](#generic-names)
+* [Thoughts on coding](#thoughts-on-coding)
+* [Line length](#line-length)
+* [Folder structure and imports](#folder-structure-and-imports)
+* [Naming](#naming)
+  * [Functions](#functions)
+  * [Booleans](#booleans)
+  * [Constants](#constants)
+  * [Handlers and Props](#handlers-and-props)
+  * [Types](#types)
+  * [Generic names](#generic-names)
+* [Order](#order)
+* [Comments](#comments)
 
 <!-- vim-markdown-toc -->
 
 ## Thoughts on coding
+
+1. _Read and write_: Programming _languages_ are a specialized form of natural
+   languages. They are more rigid, with less edge cases and context interpretation
 
 1. _Continuous refactoring_: Developers _read_ much more code than they
    _write_. Don't stop at your fist draft while also not obsessing on getting
@@ -317,3 +323,21 @@ const InputUI = (
 
     ```js
     ```
+
+## Order
+
+## Comments
+
+Write comments to explain decisions, to answer "why?", and give more context,
+not to explain what the code does. The code should be self explanatory trough
+propper naming of functions and variables.
+
+**Bad:**
+
+```js
+```
+
+**Good:**
+
+```js
+```

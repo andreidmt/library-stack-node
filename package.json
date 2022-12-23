@@ -1,7 +1,7 @@
 {
-  "name": "tpl-node",
+  "name": "library-stack-node",
   "version": "0.0.1",
-  "description": "",
+  "description": "Starter library stack for Node.js",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",

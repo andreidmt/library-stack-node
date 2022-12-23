@@ -2,7 +2,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/andreidmt/tpl-node/badge.svg)](https://coveralls.io/github/andreidmt/tpl-node)
 
-# Node.js library starter template
+# Starter library stack for Node.js
 
 > ~framework~ **library stack**  
 > _noun_
@@ -12,7 +12,7 @@
 > __linting__, __testing__, __benchmarking__ and __releasing__.
 
 <details>
-  <summary>Read more ></summary>
+  <summary>Read more</summary>
   
   > While similar to a
   > [Framework](https://en.wikipedia.org/wiki/Software_framework), providing an
